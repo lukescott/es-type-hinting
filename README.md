@@ -69,7 +69,7 @@ var point = {
 
 The motivation behind this proposal is to introduce a simple way of doing type hinting without complicated syntax.
 
-``javascript
+```javascript
 // this
 var point = {
   x Number: 0,
@@ -89,7 +89,7 @@ var point = {
   x :: Number : 0,
   y :: Number : 0
 };
-``
+```
 
 Using simple spaces translates well in other areas:
 ```javascript
