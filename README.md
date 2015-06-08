@@ -111,5 +111,90 @@ class Point3 {
 ```
 
 ### Syntax ###
+  [TODO TypeHint](https://people.mozilla.org/~jorendorff/es6-draft.html)
+  
+  ```
+  TypeHint :
+    TODO
+  ```
 
-TODO
+
+  [12.2.5 Object Initializer](https://people.mozilla.org/~jorendorff/es6-draft.html#sec-object-initializer)
+  
+  ```
+  PropertyDefinition[Yield] :
+    IdentifierReference[?Yield]
+    CoverInitializedName[?Yield]
+    PropertyName[?Yield] TypeHint  : AssignmentExpression[In, ?Yield]
+    MethodDefinition[?Yield]
+    
+  CoverInitializedName[Yield] :
+    IdentifierReference[?Yield] TypeHint Initializer[In, ?Yield]
+  
+  
+  ```
+  [12.14.5 Destructuring Assignment](https://people.mozilla.org/~jorendorff/es6-draft.html#sec-destructuring-assignment)
+  ```
+  AssignmentProperty[Yield] :
+    IdentifierReference[?Yield] TypeHint Initializer[In,?Yield]opt
+    PropertyName TypeHint : AssignmentElement[?Yield]
+  ```
+  
+  [13.2.1 Let and Const Declarations](https://people.mozilla.org/~jorendorff/es6-draft.html#sec-let-and-const-declarations)
+  ```
+  LexicalBinding[In, Yield] :
+    BindingIdentifier[?Yield] TypeHint Initializer[?In, ?Yield]opt
+    BindingPattern[?Yield] Initializer[?In, ?Yield]
+  ```
+  
+  [13.2.2 Variable Statement](https://people.mozilla.org/~jorendorff/es6-draft.html#sec-variable-statement)
+  ```
+  VariableDeclaration[In, Yield] :
+    BindingIdentifier[?Yield] TypeHint Initializer[?In, ?Yield]opt
+    BindingPattern[?Yield] Initializer[?In, ?Yield]
+  ```
+  
+  [13.2.3 Destructuring Binding Patterns](https://people.mozilla.org/~jorendorff/es6-draft.html#sec-destructuring-binding-patterns)
+  ```
+  SingleNameBinding [Yield, GeneratorParameter] :
+    [+GeneratorParameter] BindingIdentifier[Yield] TypeHint Initializer[In]opt
+    [~GeneratorParameter] BindingIdentifier[?Yield] TypeHint Initializer[In, ?Yield]opt
+  ```
+  [Iteration Statements](https://people.mozilla.org/~jorendorff/es6-draft.html#sec-iteration-statements)
+  TODO: For the binding variable.
+  
+  [14.1 Function Definitions](https://people.mozilla.org/~jorendorff/es6-draft.html#sec-function-definitions)
+  ```
+  FunctionDeclaration[Yield, Default] :
+    function BindingIdentifier[?Yield] ( FormalParameters ) TypeHint { FunctionBody }
+    [+Default] function ( FormalParameters ) TypeHint { FunctionBody }
+  FunctionExpression :
+    function BindingIdentifieropt ( FormalParameters ) TypeHint { FunctionBody }
+  
+  FormalParameter[Yield,GeneratorParameter] :
+    BindingElement[?Yield, ?GeneratorParameter] TypeHint
+  ```
+  
+  [14.2 Arrow Function Definitions](https://people.mozilla.org/~jorendorff/es6-draft.html#sec-arrow-function-definitions)
+  TODO: How do you distinguish between return type, and single argument type hint?
+  
+  [14.3 Method Definitions](https://people.mozilla.org/~jorendorff/es6-draft.html#sec-method-definitions)
+  ```
+  MethodDefinition[Yield] :
+    PropertyName[?Yield] ( StrictFormalParameters ) TypeHint { FunctionBody }
+    GeneratorMethod[?Yield]
+    get PropertyName[?Yield] ( ) TypeHint { FunctionBody }
+    set PropertyName[?Yield] ( PropertySetParameterList ) { FunctionBody }
+  ```
+  TODO: does `set` need a TypeHint? Probably not...
+  
+  [14.4 Generator Function Definitions](https://people.mozilla.org/~jorendorff/es6-draft.html#sec-generator-function-definitions)
+  ```
+  GeneratorMethod[Yield] :
+    * PropertyName[?Yield] ( StrictFormalParameters[Yield,GeneratorParameter] ) TypeHint { GeneratorBody }
+  GeneratorDeclaration[Yield, Default] :
+    function * BindingIdentifier[?Yield] ( FormalParameters[Yield,GeneratorParameter] ) TypeHint { GeneratorBody }
+    [+Default] function * ( FormalParameters[Yield,GeneratorParameter] ) TypeHint { GeneratorBody }
+  GeneratorExpression :
+    function * BindingIdentifier[Yield]opt ( FormalParameters[Yield,GeneratorParameter] ) TypeHint { GeneratorBody }
+  ```
