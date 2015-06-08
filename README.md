@@ -111,6 +111,13 @@ class Point3 {
 ```
 
 ### Syntax ###
+  [TODO TypeHint](https://people.mozilla.org/~jorendorff/es6-draft.html)
+  
+  ```
+  TypeHint :
+    TODO
+  ```
+
 
   [12.2.5 Object Initializer](https://people.mozilla.org/~jorendorff/es6-draft.html#sec-object-initializer)
   
@@ -181,7 +188,7 @@ class Point3 {
   ```
   TODO: does `set` need a TypeHint? Probably not...
   
-  [14.4 Genrator Function Definitions](https://people.mozilla.org/~jorendorff/es6-draft.html#sec-generator-function-definitions)
+  [14.4 Generator Function Definitions](https://people.mozilla.org/~jorendorff/es6-draft.html#sec-generator-function-definitions)
   ```
   GeneratorMethod[Yield] :
     * PropertyName[?Yield] ( StrictFormalParameters[Yield,GeneratorParameter] ) TypeHint { GeneratorBody }
