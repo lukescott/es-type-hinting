@@ -1,8 +1,21 @@
 ## ECMAScript Type Hinting ##
 
+### Overview
+
 This proposal introduces type hinting.
 
 Inspired by types in Go. Similar to flow or TypeScript, but uses WSP (SP / HTAB) ` ` instead of a colon `:`.
+
+### Prior Art:
+Type Hinting:
+* Closure Compiler
+* JSDoc
+ 
+Type Checking/Annotations:
+* Flow
+* TypeScript
+* ActionScript
+* Closure Compiler
 
 ### Examples ###
 
@@ -53,7 +66,7 @@ function map(array Array, callback Function) {
 
 ### Motivation and Overview ###
 
-A lot of variations of type hinting exists, such as flow, TypeScript, and other proposals. These syntaxes use a colon `:`, similar to ActionScript. The `:` syntax is ambiguous to existing plain JavaScript objects:
+A lot of variations of type hinting exists, such as flow, TypeScript, and other proposals. These syntaxes use a colon `:`, similar to ActionScript. The `:` syntax is ambiguous to existing plain JavaScript objects, and ES6 destructuring:
 
 ```javascript
 var point = {
@@ -65,7 +78,12 @@ var point = {
   x: Number,
   y: Number
 };
+
+let {x: internalName Number = defaultValue} = point;
+
 ```
+
+
 
 The motivation behind this proposal is to introduce a simple way of doing type hinting without complicated syntax.
 
@@ -89,6 +107,13 @@ var point = {
   x :: Number : 0,
   y :: Number : 0
 };
+
+// this
+let { x: y Number = 0 } = o;
+// instead of
+let { x:Number: y = 0 } = o;
+// or
+let { x: y:Number = 0 } = o;
 ```
 
 Using simple spaces translates well in other areas:
@@ -176,7 +201,14 @@ class Point3 {
   ```
   
   [14.2 Arrow Function Definitions](https://people.mozilla.org/~jorendorff/es6-draft.html#sec-arrow-function-definitions)
-  TODO: How do you distinguish between return type, and single argument type hint?
+  ```
+  ArrowParameters[Yield] :
+    BindingIdentifier[?Yield] TypeHint
+    CoverParenthesizedExpressionAndArrowParameterList[?Yield] TypeHint
+    
+  ```
+  
+  TODO: semantics of what `TypeHint` is attached to.
   
   [14.3 Method Definitions](https://people.mozilla.org/~jorendorff/es6-draft.html#sec-method-definitions)
   ```
