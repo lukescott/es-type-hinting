@@ -2,20 +2,8 @@
 
 ### Overview
 
-This proposal introduces type hinting.
+The goal of this proposal is to provide a syntactic mechanism for type hinting in ECMAScript. With inspiration from Go, it propses that type hints are placed after the thing they are modifying, but using only white-space (SP / HTAB) as a separator. This is different to most existing proposals and implementations which use a colon `:` as a separator.
 
-Inspired by types in Go. Similar to flow or TypeScript, but uses WSP (SP / HTAB) ` ` instead of a colon `:`.
-
-### Prior Art:
-Type Hinting:
-* Closure Compiler
-* JSDoc
- 
-Type Checking/Annotations:
-* Flow
-* TypeScript
-* ActionScript
-* Closure Compiler
 
 ### Examples ###
 
@@ -64,28 +52,25 @@ function map(array Array, callback Function) {
 }
 ```
 
-### Motivation and Overview ###
+### Motivation ###
 
-A lot of variations of type hinting exists, such as flow, TypeScript, and other proposals. These syntaxes use a colon `:`, similar to ActionScript. The `:` syntax is ambiguous to existing plain JavaScript objects, and ES6 destructuring:
+A lot of variations of type hinting exists, such as flow, TypeScript, and other proposals. Most of these syntaxes use a colon `:`, similar to ActionScript, and also existed in the abandoned [ECMAScript 4](http://www.ecmascript.org/es4/spec/overview.pdf) spec. The `:` syntax is ambiguous to existing plain JavaScript objects, and ES6 destructuring:
 
 ```javascript
 var point = {
   x: 0,
   y: 0
 };
-// vs
+
 var point = {
-  x: Number,
+  x: Number, // These aren't type annotations, but rather, is a map of x => Number, y => Number
   y: Number
 };
-
-let {x: internalName Number = defaultValue} = point;
+// Where would the type hint go in destructuring? 
+let {x: xcoord = defaultValue} = point;
 
 ```
-
-
-
-The motivation behind this proposal is to introduce a simple way of doing type hinting without complicated syntax.
+This proposal introduces a simple way of doing type hinting without complicated syntax:
 
 ```javascript
 // this
@@ -230,3 +215,16 @@ class Point3 {
   GeneratorExpression :
     function * BindingIdentifier[Yield]opt ( FormalParameters[Yield,GeneratorParameter] ) TypeHint { GeneratorBody }
   ```
+
+### Prior Art:
+Type Hinting:
+* Closure Compiler
+* JSDoc
+* [Flow Comments](http://flowtype.org/blog/2015/02/20/Flow-Comments.html)
+ 
+Type Checking/Annotations:
+* Flow
+* TypeScript
+* ActionScript
+* Closure Compiler
+* [Abandoned ECMAScript 4](http://www.ecmascript.org/es4/spec/overview.pdf
