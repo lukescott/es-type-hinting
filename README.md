@@ -120,6 +120,32 @@ class Point3 {
 }
 ```
 
+### Rationale
+
+*Why is the type hint after the thing it modifies, instead of before like in C++?*
+
+The biggest reason for this decision is that it allows all declarations to start with a keyword, otherwise you end up with inconsistant syntax:
+```javascript
+// You have:
+Number function a() { return 1; }
+Number let b = 1;
+// But also have:
+class C {}
+```
+Requiring the hint to go after keeps the keyword first on the line.
+
+The second reason is precedent. The previous incarnation of adding typing to the language occured in [ECMAScript 4](http://www.ecmascript.org/es4/spec/overview.pdf), which added the type in the same position as ActionScript, and is now the chosen position in related languages such as TypeScript and Flow. There is also an argument to be made when relating to natural languages: the ordering of "noun adjective" (as in French, and similar to this proposal) is [twice as common](http://wals.info/feature/87A#2/18.0/144.8) as the "adjective noun" ordering (as in English, and similar to C++). 
+
+*Why use a space as a separator instead of a colon `:` like in TypeScript?*
+
+The primary reason, as mentioned in the Motivation section, is that using the colon becomes awkward in certain cases, especially with object destructuring.
+```javascript
+let { name:alias } = o; // Where does the ": TypeHint" go?
+```
+
+The second reason is precedent. Go-lang is the primary precendent to use spaces as the annotation separator.
+
+
 ### Syntax ###
   [TODO TypeHint](https://people.mozilla.org/~jorendorff/es6-draft.html)
   
@@ -231,4 +257,4 @@ Type Checking/Annotations:
 * TypeScript
 * ActionScript
 * Closure Compiler
-* [Abandoned ECMAScript 4](http://www.ecmascript.org/es4/spec/overview.pdf
+* [Abandoned ECMAScript 4](http://www.ecmascript.org/es4/spec/overview.pdf)
