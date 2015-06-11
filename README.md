@@ -8,42 +8,36 @@ The goal of this proposal is to provide a syntactic mechanism for type hinting i
 ### Examples ###
 
 ```javascript
-// without defaults
-// uses type default: Number = 0, String = "", [Object] = undefined
 var point = {
-  x Number,
-  y Number
+  x number,
+  y number
 };
-
-// with defaults
 var point2 = {
-  x Number: 10,
-  y Number: 50
+  x number: 10,
+  y number: 50
 };
 
-// without defaults, same as var point above
+// If class properties are added
 class Point {
-  x Number,
-  y Number
+  x number,
+  y number
 }
-
-// with defaults, assuming properties use ':'
+// Assuming : is used
 class Point2 {
-  x Number: 0
-  y Number: 0
+  x number: 0
+  y number: 0
 }
-
-// with defaults, assuming properties use '='
+// Assuming = is used
 class Point3 {
-  x Number = 0
-  y Number = 0
+  x number = 0
+  y number = 0
 }
 
-function print(text String) {
+function print(text string) {
   console.log(text);
 }
 
-function toLowerCase(text String) String {
+function toLowerCase(text string) string {
   return text.toLowerCase();
 }
 
@@ -63,8 +57,8 @@ var point = {
 };
 
 var point = {
-  x: Number, // These aren't type annotations, but rather, is a map of x => Number, y => Number
-  y: Number
+  x: number, // These aren't type annotations, but rather, is a map of x => number, y => number
+  y: number
 };
 // Where would the type hint go in destructuring? 
 let {x: xcoord = defaultValue} = point;
@@ -75,30 +69,30 @@ This proposal introduces a simple way of doing type hinting without complicated 
 ```javascript
 // this
 var point = {
-  x Number: 0,
-  y Number: 0
+  x number: 0,
+  y number: 0
 };
 // instead of (requires `= value`)
 var point = {
-  x: Number = 0,
-  y: Number = 0
+  x: number = 0,
+  y: number = 0
 };
 // or some other complex syntaxs
 var point = {
-  x :Number: 0,
-  y :Number: 0
+  x :number: 0,
+  y :number: 0
 };
 var point = {
-  x :: Number : 0,
-  y :: Number : 0
+  x :: number : 0,
+  y :: number : 0
 };
 
 // this
-let { x: y Number = 0 } = o;
+let { x: y number = 0 } = o;
 // instead of
-let { x:Number: y = 0 } = o;
+let { x:number: y = 0 } = o;
 // or
-let { x: y:Number = 0 } = o;
+let { x: y:number = 0 } = o;
 ```
 
 Using simple spaces translates well in other areas:
@@ -107,16 +101,16 @@ function map(array Array, callback Function) {...}
 
 // doesn't matter if class properties end up using `:` or `=`
 class Point {
-  x Number,
-  y Number
+  x number,
+  y number
 }
 class Point2 {
-  x Number: 0
-  y Number: 0
+  x number: 0
+  y number: 0
 }
 class Point3 {
-  x Number = 0
-  y Number = 0
+  x number = 0
+  y number = 0
 }
 ```
 
@@ -127,8 +121,8 @@ class Point3 {
 The biggest reason for this decision is that it allows all declarations to start with a keyword, otherwise you end up with inconsistant syntax:
 ```javascript
 // You have:
-Number function a() { return 1; }
-Number let b = 1;
+number function a() { return 1; }
+number let b = 1;
 // But also have:
 class C {}
 ```
