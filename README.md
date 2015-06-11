@@ -165,65 +165,65 @@ The second reason is precedent. Go-lang is the primary precendent to use spaces 
   PropertyDefinition[Yield] :
     IdentifierReference[?Yield]
     CoverInitializedName[?Yield]
-    PropertyName[?Yield] TypeHint  : AssignmentExpression[In, ?Yield]
+    PropertyName[?Yield] TypeHint[?Yield]opt  : AssignmentExpression[In, ?Yield]
     MethodDefinition[?Yield]
     
   CoverInitializedName[Yield] :
-    IdentifierReference[?Yield] TypeHint Initializer[In, ?Yield]
+    IdentifierReference[?Yield] TypeHint[?Yield]opt Initializer[In, ?Yield]
   
   
   ```
   [12.14.5 Destructuring Assignment](https://people.mozilla.org/~jorendorff/es6-draft.html#sec-destructuring-assignment)
   ```
   AssignmentProperty[Yield] :
-    IdentifierReference[?Yield] TypeHint Initializer[In,?Yield]opt
-    PropertyName TypeHint : AssignmentElement[?Yield]
+    IdentifierReference[?Yield] TypeHint[?Yield]opt Initializer[In,?Yield]opt
+    PropertyName TypeHint[?Yield] : AssignmentElement[?Yield]
   ```
   
   [13.2.1 Let and Const Declarations](https://people.mozilla.org/~jorendorff/es6-draft.html#sec-let-and-const-declarations)
   ```
   LexicalBinding[In, Yield] :
-    BindingIdentifier[?Yield] TypeHint Initializer[?In, ?Yield]opt
+    BindingIdentifier[?Yield] TypeHint[?Yield]opt Initializer[?In, ?Yield]opt
     BindingPattern[?Yield] Initializer[?In, ?Yield]
   ```
   
   [13.2.2 Variable Statement](https://people.mozilla.org/~jorendorff/es6-draft.html#sec-variable-statement)
   ```
   VariableDeclaration[In, Yield] :
-    BindingIdentifier[?Yield] TypeHint Initializer[?In, ?Yield]opt
+    BindingIdentifier[?Yield] TypeHint[?Yield]opt Initializer[?In, ?Yield]opt
     BindingPattern[?Yield] Initializer[?In, ?Yield]
   ```
   
   [13.2.3 Destructuring Binding Patterns](https://people.mozilla.org/~jorendorff/es6-draft.html#sec-destructuring-binding-patterns)
   ```
   SingleNameBinding [Yield, GeneratorParameter] :
-    [+GeneratorParameter] BindingIdentifier[Yield] TypeHint Initializer[In]opt
-    [~GeneratorParameter] BindingIdentifier[?Yield] TypeHint Initializer[In, ?Yield]opt
+    [+GeneratorParameter] BindingIdentifier[Yield] TypeHint[?Yield]opt Initializer[In]opt
+    [~GeneratorParameter] BindingIdentifier[?Yield] TypeHint[?Yield]opt Initializer[In, ?Yield]opt
   ```
   [13.6 Iteration Statements](https://people.mozilla.org/~jorendorff/es6-draft.html#sec-iteration-statements)
   ```
   ForBinding[Yield] :
-    BindingIdentifier[?Yield] TypeHint
+    BindingIdentifier[?Yield] TypeHint[?Yield]opt
     BindingPattern[?Yield]
   ```
   
   [14.1 Function Definitions](https://people.mozilla.org/~jorendorff/es6-draft.html#sec-function-definitions)
   ```
   FunctionDeclaration[Yield, Default] :
-    function BindingIdentifier[?Yield] ( FormalParameters ) TypeHint { FunctionBody }
-    [+Default] function ( FormalParameters ) TypeHint { FunctionBody }
+    function BindingIdentifier[?Yield] ( FormalParameters ) TypeHint[?Yield]opt { FunctionBody }
+    [+Default] function ( FormalParameters ) TypeHint[?Yield]opt { FunctionBody }
   FunctionExpression :
-    function BindingIdentifieropt ( FormalParameters ) TypeHint { FunctionBody }
+    function BindingIdentifieropt ( FormalParameters ) TypeHint[?Yield]opt { FunctionBody }
   
   FormalParameter[Yield,GeneratorParameter] :
-    BindingElement[?Yield, ?GeneratorParameter] TypeHint
+    BindingElement[?Yield, ?GeneratorParameter] TypeHint[?Yield]opt
   ```
   
   [14.2 Arrow Function Definitions](https://people.mozilla.org/~jorendorff/es6-draft.html#sec-arrow-function-definitions)
   ```
   ArrowParameters[Yield] :
-    BindingIdentifier[?Yield] TypeHint
-    CoverParenthesizedExpressionAndArrowParameterList[?Yield] TypeHint
+    BindingIdentifier[?Yield] TypeHint[?Yield]opt
+    CoverParenthesizedExpressionAndArrowParameterList[?Yield] TypeHint[?Yield]opt
     
   ```
   
@@ -232,22 +232,22 @@ The second reason is precedent. Go-lang is the primary precendent to use spaces 
   [14.3 Method Definitions](https://people.mozilla.org/~jorendorff/es6-draft.html#sec-method-definitions)
   ```
   MethodDefinition[Yield] :
-    PropertyName[?Yield] ( StrictFormalParameters ) TypeHint { FunctionBody }
+    PropertyName[?Yield] ( StrictFormalParameters ) TypeHint[?Yield]opt { FunctionBody }
     GeneratorMethod[?Yield]
-    get PropertyName[?Yield] ( ) TypeHint { FunctionBody }
-    set PropertyName[?Yield] ( PropertySetParameterList ) { FunctionBody }
+    get PropertyName[?Yield] ( ) TypeHint[?Yield]opt { FunctionBody }
+    set PropertyName[?Yield] ( PropertySetParameterList ) TypeHint[?Yield]opt { FunctionBody }
   ```
-  TODO: does `set` need a TypeHint? Probably not...
+  TODO: static semantics of set's typehint, it should be a syntax error if it's not empty, or "void"
   
   [14.4 Generator Function Definitions](https://people.mozilla.org/~jorendorff/es6-draft.html#sec-generator-function-definitions)
   ```
   GeneratorMethod[Yield] :
-    * PropertyName[?Yield] ( StrictFormalParameters[Yield,GeneratorParameter] ) TypeHint { GeneratorBody }
+    * PropertyName[?Yield] ( StrictFormalParameters[Yield,GeneratorParameter] ) TypeHint[?Yield]opt { GeneratorBody }
   GeneratorDeclaration[Yield, Default] :
-    function * BindingIdentifier[?Yield] ( FormalParameters[Yield,GeneratorParameter] ) TypeHint { GeneratorBody }
-    [+Default] function * ( FormalParameters[Yield,GeneratorParameter] ) TypeHint { GeneratorBody }
+    function * BindingIdentifier[?Yield] ( FormalParameters[Yield,GeneratorParameter] ) TypeHint[?Yield]opt { GeneratorBody }
+    [+Default] function * ( FormalParameters[Yield,GeneratorParameter] ) TypeHint[?Yield]opt { GeneratorBody }
   GeneratorExpression :
-    function * BindingIdentifier[Yield]opt ( FormalParameters[Yield,GeneratorParameter] ) TypeHint { GeneratorBody }
+    function * BindingIdentifier[Yield]opt ( FormalParameters[Yield,GeneratorParameter] ) TypeHint[?Yield]opt { GeneratorBody }
   ```
 
 ### Prior Art:
