@@ -170,8 +170,12 @@ class Point3 {
     [+GeneratorParameter] BindingIdentifier[Yield] TypeHint Initializer[In]opt
     [~GeneratorParameter] BindingIdentifier[?Yield] TypeHint Initializer[In, ?Yield]opt
   ```
-  [Iteration Statements](https://people.mozilla.org/~jorendorff/es6-draft.html#sec-iteration-statements)
-  TODO: For the binding variable.
+  [13.6 Iteration Statements](https://people.mozilla.org/~jorendorff/es6-draft.html#sec-iteration-statements)
+  ```
+  ForBinding[Yield] :
+    BindingIdentifier[?Yield] TypeHint
+    BindingPattern[?Yield]
+  ```
   
   [14.1 Function Definitions](https://people.mozilla.org/~jorendorff/es6-draft.html#sec-function-definitions)
   ```
