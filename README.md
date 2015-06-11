@@ -2,7 +2,7 @@
 
 ### Overview
 
-The goal of this proposal is to provide a syntactic mechanism for type hinting in ECMAScript. With inspiration from Go, it propses that type hints are placed after the thing they are modifying, but using only white-space (SP / HTAB) as a separator. This is different to most existing proposals and implementations which use a colon `:` as a separator.
+The goal of this proposal is to provide a syntactic mechanism for type hinting in ECMAScript without specifying how those type hints are to be used. With inspiration from Go, it propses that type hints are placed after the thing they are modifying, but using only white-space (SP / HTAB) as a separator. This is different to most existing proposals and implementations which use a colon `:` as a separator.
 
 
 ### Examples ###
@@ -150,8 +150,12 @@ The second reason is precedent. Go-lang is the primary precendent to use spaces 
   [TODO TypeHint](https://people.mozilla.org/~jorendorff/es6-draft.html)
   
   ```
-  TypeHint :
-    TODO
+  TypeHint[Yield] :
+    [~Yield] IdentifierReference[~Yield]
+    number
+    string
+    boolean
+    void
   ```
 
 
