@@ -12,6 +12,9 @@ var point = {
   x number, // defaults to 0
   y number  // defaults to 0
 };
+```
+
+```javascript
 class Point {
   x number, // defaults to 0
   y number  // defaults to 0
@@ -23,6 +26,9 @@ var point = {
   x number: 10,
   y number: 50
 };
+```
+
+```javascript
 class Point {
   x number: 10
   y number: 50
@@ -40,9 +46,7 @@ exclaim(); // "!" not "undefined!"
 ```
 
 ```javascript
-class Foo {
-  
-}
+class Foo {}
 
 // foo and callback don't have a defaults
 function callbackFoo(foo Foo, callback Function) {
