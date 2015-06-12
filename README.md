@@ -9,42 +9,46 @@ The goal of this proposal is to provide a syntactic mechanism for type hinting i
 
 ```javascript
 var point = {
-  x number,
-  y number
+  x number, // defaults to 0
+  y number  // defaults to 0
 };
-var point2 = {
+class Point {
+  x number, // defaults to 0
+  y number  // defaults to 0
+}
+```
+
+```javascript
+var point = {
   x number: 10,
   y number: 50
 };
-
-// If class properties are added
 class Point {
-  x number,
-  y number
-}
-// Assuming : is used
-class Point2 {
-  x number: 0
-  y number: 0
-}
-// Assuming = is used
-class Point3 {
-  x number = 0
-  y number = 0
-}
-
-function print(text string) {
-  console.log(text);
-}
-
-function toLowerCase(text string) string {
-  return text.toLowerCase();
-}
-
-function map(array Array, callback Function) {
-  return array.map(callback);
+  x number: 10
+  y number: 50
 }
 ```
+
+```javascript
+// text defaults to ""
+function exclaim(text string) string {
+  return text + "!";
+}
+
+exclaim("hello"); // "hello!"
+exclaim(); // "!" not "undefined!"
+```
+
+```javascript
+class Foo {
+  
+}
+
+// foo and callback don't have a defaults
+function callbackFoo(foo Foo, callback Function) {
+  callbackFoo(foo);
+}
+``
 
 ### Motivation ###
 
