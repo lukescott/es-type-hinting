@@ -6,12 +6,12 @@ The goal of this proposal is to provide a syntactic mechanism for type hinting i
 
 ### Motivation ###
 
-Inconsistent types lead to common bugs in JavaScript programs.
+Inconsistent types lead to common bugs in JavaScript programs. Some common examples:
 
 ```javascript
-"5" + 5 = "55"
-"5" + undefined = "5undefined"
-5 + undefined = NaN
+"5" + 5 // "55"
+"5" + undefined // "5undefined"
+5 + undefined // NaN
 ```
 
 Specifying types and sticking to them is a must. Facebook, who maintains
@@ -27,7 +27,7 @@ of JavaScript, that provides optional static typing. Angular 2.0 is
 All of the above solutions are great, but suffer from the following issues:
 
 - They are not part of the ECMA standard.
-- They use a colon `:` that is ambiguous with:
+- They use a colon `:` which is ambiguous with:
     - JavaScript objects
     ```javascript
     var point = {
@@ -40,7 +40,7 @@ All of the above solutions are great, but suffer from the following issues:
     let {x: xcoord = defaultValue} = point;
     ```
 
-The goal of this proposal is to intoroduce a simple syntax for type hinting in JavaScript that is compatible with existing features.
+The goal of this proposal is to introduce a simple syntax for type hinting in JavaScript that is compatible with existing features.
 
 ### Examples ###
 
