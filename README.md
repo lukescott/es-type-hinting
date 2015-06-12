@@ -4,37 +4,78 @@
 
 The goal of this proposal is to provide a syntactic mechanism for type hinting in ECMAScript without specifying how those type hints are to be used. With inspiration from Go, it propses that type hints are placed after the thing they are modifying, but using only white-space (SP / HTAB) as a separator. This is different to most existing proposals and implementations which use a colon `:` as a separator.
 
+### Motivation ###
+
+Inconsistent types lead to common bugs in JavaScript programs.
+
+```javascript
+"5" + 5 = "55"
+"5" + undefined = "5undefined"
+5 + undefined = NaN
+```
+
+Specifying types and sticking to them is a must. Facebook, who maintains
+9.9+ million lines of code, developed a solution to this problem called
+[flow](http://flowtype.org/). There have also been other proposals, notably
+an abandoned [ECMAScript 4](http://www.ecmascript.org/es4/spec/overview.pdf)
+spec.
+
+There is also [TypeScript](http://www.typescriptlang.org/), a strict superset
+of JavaScript, that provides optional static typing. Angular 2.0 is
+[currently using TypeScript](http://blogs.msdn.com/b/typescript/archive/2015/03/05/angular-2-0-built-on-typescript.aspx).
+
+All of the above solutions are great, but suffer from the following issues:
+
+- They are not part of the ECMA standard.
+- They use a colon `:` that is ambiguous with:
+    - JavaScript objects
+    ```javascript
+    var point = {
+      x: 0,
+      y: 0
+    };
+    ```
+    - ES6 destructuring
+    ```javascript
+    let {x: xcoord = defaultValue} = point;
+    ```
+
+The goal of this proposal is to intoroduce a simple syntax for type hinting in JavaScript that is compatible with existing features.
 
 ### Examples ###
 
+Objects:
 ```javascript
 var point = {
   x number, // defaults to 0
-  y number  // defaults to 0
+  y number: 0 // provide value
 };
 ```
 
+ES6 destructuring:
+```javascript
+let {x: xcoord number = defaultValue} = point;
+```
+
+ES6 Classes:
 ```javascript
 class Point {
-  x number, // defaults to 0
-  y number  // defaults to 0
+  x number // defaults to 0
+  y number: 0 // provide value
+  
+  move(x number, y number) {
+    // ...
+  }
+  
+  distanceFrom(x number, y number) number {
+    let distance number; // default to 0
+    // ...
+    return distance
+  }
 }
 ```
 
-```javascript
-var point = {
-  x number: 10,
-  y number: 50
-};
-```
-
-```javascript
-class Point {
-  x number: 10
-  y number: 50
-}
-```
-
+Functions:
 ```javascript
 // text defaults to ""
 function exclaim(text string) string {
@@ -44,81 +85,12 @@ function exclaim(text string) string {
 exclaim("hello"); // "hello!"
 exclaim(); // "!" not "undefined!"
 ```
-
 ```javascript
 class Foo {}
 
-// foo and callback don't have a defaults
+// foo and callback don't have defaults
 function callbackFoo(foo Foo, callback Function) {
   callbackFoo(foo);
-}
-```
-
-### Motivation ###
-
-A lot of variations of type hinting exists, such as flow, TypeScript, and other proposals. Most of these syntaxes use a colon `:`, similar to ActionScript, and also existed in the abandoned [ECMAScript 4](http://www.ecmascript.org/es4/spec/overview.pdf) spec. The `:` syntax is ambiguous to existing plain JavaScript objects, and ES6 destructuring:
-
-```javascript
-var point = {
-  x: 0,
-  y: 0
-};
-
-var point = {
-  x: number, // These aren't type annotations, but rather, is a map of x => number, y => number
-  y: number
-};
-// Where would the type hint go in destructuring? 
-let {x: xcoord = defaultValue} = point;
-
-```
-This proposal introduces a simple way of doing type hinting without complicated syntax:
-
-```javascript
-// this
-var point = {
-  x number: 0,
-  y number: 0
-};
-// instead of (requires `= value`)
-var point = {
-  x: number = 0,
-  y: number = 0
-};
-// or some other complex syntaxs
-var point = {
-  x :number: 0,
-  y :number: 0
-};
-var point = {
-  x :: number : 0,
-  y :: number : 0
-};
-
-// this
-let { x: y number = 0 } = o;
-// instead of
-let { x:number: y = 0 } = o;
-// or
-let { x: y:number = 0 } = o;
-```
-
-Using simple spaces translates well in other areas:
-```javascript
-function map(array Array, callback Function) {...}
-
-// doesn't matter if class properties end up using `:` or `=`
-class Point {
-  x number,
-  y number
-}
-class Point2 {
-  x number: 0
-  y number: 0
-}
-class Point3 {
-  x number = 0
-  y number = 0
 }
 ```
 
