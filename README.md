@@ -48,7 +48,7 @@ class Foo {
 function callbackFoo(foo Foo, callback Function) {
   callbackFoo(foo);
 }
-``
+```
 
 ### Motivation ###
 
