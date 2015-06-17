@@ -1,5 +1,7 @@
 ## ECMAScript Type Hinting ##
 
+[![Join the chat at https://gitter.im/lukescott/es-type-hinting](https://badges.gitter.im/Join%20Chat.svg)](https://gitter.im/lukescott/es-type-hinting?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge)
+
 ### Overview
 
 The goal of this proposal is to provide a syntactic mechanism for type hinting in ECMAScript without specifying how those type hints are to be used. With inspiration from Go, it propses that type hints are placed after the thing they are modifying, but using only white-space (SP / HTAB) as a separator. This is different to most existing proposals and implementations which use a colon `:` as a separator.
