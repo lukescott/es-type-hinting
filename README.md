@@ -1,3 +1,7 @@
+## ES Type Hints
+
+* [Overview and Rationale](OverviewAndRationale.md)
+* [Examples](docs/examples.md)
 
 ### Syntax ###
   [TODO TypeHint](https://people.mozilla.org/~jorendorff/es6-draft.html)
