@@ -1,5 +1,8 @@
 ## ECMAScript Type Hinting ##
 
+* [Spec](README.md)
+* [Examples](docs/examples.md)
+
 ### Overview
 
 The goal of this proposal is to provide a syntactic mechanism for type hinting in ECMAScript without specifying how those type hints are to be used. With inspiration from Go, it propses that type hints are placed after the thing they are modifying, but using only white-space (SP / HTAB) as a separator. This is different to most existing proposals and implementations which use a colon `:` as a separator.
