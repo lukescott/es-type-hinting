@@ -15,11 +15,21 @@
   
   ```
   PropertyDefinition[Yield] :
-    IdentifierReference[?Yield]
+    IdentifierReference[?Yield] TypeHint[?Yield]opt
     CoverInitializedName[?Yield]
-    PropertyName[?Yield] TypeHint[?Yield]opt  : AssignmentExpression[In, ?Yield]
+    PropertyName[?Yield] : AssignmentExpression[In, ?Yield]
     MethodDefinition[?Yield]
-    
+  
+  PropertyName[Yield,GeneratorParameter] :
+    LiteralPropertyName
+    [+GeneratorParameter] ComputedPropertyName TypeHint[?Yield]opt
+    [~GeneratorParameter] ComputedPropertyName[?Yield] TypeHint[?Yield]opt
+  
+  LiteralPropertyName :
+    IdentifierName TypeHintopt
+    StringLiteral
+    NumericLiteral
+  
   CoverInitializedName[Yield] :
     IdentifierReference[?Yield] TypeHint[?Yield]opt Initializer[In, ?Yield]
   
