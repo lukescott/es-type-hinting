@@ -7,12 +7,13 @@
   [TODO TypeHint](http://www.ecma-international.org/ecma-262/6.0/)
   
   ```
-  TypeHint[Yield] :
+  TypeHint[Yield, ReturnType] :
     [~Yield] IdentifierReference[~Yield]
     number
     string
     boolean
-    void
+    [+ReturnType] void
+    any
   ```
 
   [12.2.6 Object Initializer](http://www.ecma-international.org/ecma-262/6.0/#sec-object-initializer)
@@ -76,10 +77,10 @@
   [14.1 Function Definitions](http://www.ecma-international.org/ecma-262/6.0/#sec-function-definitions)
   ```
   FunctionDeclaration[Yield, Default] :
-    function BindingIdentifier[?Yield] ( FormalParameters ) TypeHint[?Yield]opt { FunctionBody }
+    function BindingIdentifier[?Yield] ( FormalParameters ) TypeHint[?Yield, ReturnType]opt { FunctionBody }
     [+Default] function ( FormalParameters ) TypeHint[?Yield]opt { FunctionBody }
   FunctionExpression :
-    function BindingIdentifieropt ( FormalParameters ) TypeHint[?Yield]opt { FunctionBody }
+    function BindingIdentifieropt ( FormalParameters ) TypeHint[?Yield, ReturnType]opt { FunctionBody }
   
   FormalParameter[Yield,GeneratorParameter] :
     BindingElement[?Yield, ?GeneratorParameter] TypeHint[?Yield]opt
@@ -89,11 +90,20 @@
   ```
   ArrowParameters[Yield] :
     BindingIdentifier[?Yield] TypeHint[?Yield]opt
-    CoverParenthesizedExpressionAndArrowParameterList[?Yield] TypeHint[?Yield]opt
+    CoverParenthesizedExpressionAndArrowParameterList[?Yield] TypeHint[?Yield, ReturnType]opt
     
   ```
   
-  TODO: semantics of what `TypeHint` is attached to.
+  [14.2.x Semantics](https://people.mozilla.org/~jorendorff/es6-draft.html#sec-arrow-function-definitions)
+    TODO: wording, title wording
+    
+    *ArrowParameters* **:** *BindingIdentifier* *TypeHint*
+    
+      * *TypeHint* is type associated with the singlar parameter specified by *BindingIdentifier*
+    
+    *ArrowParameters* **:** *CoverParenthesizedExpressionAndArrowParameterList* *TypeHint*
+    
+      * *TypeHint* is the type associated with the return type of the arrow function.
   
   [14.3 Method Definitions](http://www.ecma-international.org/ecma-262/6.0/#sec-method-definitions)
   ```
@@ -103,7 +113,15 @@
     get PropertyName[?Yield] ( ) TypeHint[?Yield]opt { FunctionBody }
     set PropertyName[?Yield] ( PropertySetParameterList ) TypeHint[?Yield]opt { FunctionBody }
   ```
-  TODO: static semantics of set's typehint, it should be a syntax error if it's not empty, or "void"
+  [14.3.1 Static Semantics: Early Errors](https://people.mozilla.org/~jorendorff/es6-draft.html#sec-method-definitions-static-semantics-early-errors)
+  
+    
+    *MethodDefinition* **:** **set** *PropertyName* **(** *PropertySetParameterList* **)** *TypeHint* **{** *FunctionBody* **}**
+    
+    * It is a Syntax Error if BoundNames of *PropertySetParameterList* contains any duplicate elements.
+    * It is a Syntax Error if any element of the BoundNames of *PropertySetParameterList* also occurs in the LexicallyDeclaredNames of *FunctionBody*.
+    * It is a Syntax Error if *TypeHint* is anything other than **void**
+  
   
   [14.4 Generator Function Definitions](http://www.ecma-international.org/ecma-262/6.0/#sec-generator-function-definitions)
   ```
