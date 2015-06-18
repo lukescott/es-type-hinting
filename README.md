@@ -4,7 +4,7 @@
 * [Examples](docs/examples.md)
 
 ### Syntax ###
-  [TODO TypeHint](https://people.mozilla.org/~jorendorff/es6-draft.html)
+  [TODO TypeHint](http://www.ecma-international.org/ecma-262/6.0/)
   
   ```
   TypeHint[Yield] :
@@ -15,7 +15,7 @@
     void
   ```
 
-  [12.2.5 Object Initializer](https://people.mozilla.org/~jorendorff/es6-draft.html#sec-object-initializer)
+  [12.2.6 Object Initializer](http://www.ecma-international.org/ecma-262/6.0/#sec-object-initializer)
   
   ```
   PropertyDefinition[Yield] :
@@ -29,41 +29,41 @@
   
   
   ```
-  [12.14.5 Destructuring Assignment](https://people.mozilla.org/~jorendorff/es6-draft.html#sec-destructuring-assignment)
+  [12.14.5 Destructuring Assignment](http://www.ecma-international.org/ecma-262/6.0/#sec-destructuring-assignment)
   ```
   AssignmentProperty[Yield] :
     IdentifierReference[?Yield] TypeHint[?Yield]opt Initializer[In,?Yield]opt
     PropertyName TypeHint[?Yield] : AssignmentElement[?Yield]
   ```
   
-  [13.2.1 Let and Const Declarations](https://people.mozilla.org/~jorendorff/es6-draft.html#sec-let-and-const-declarations)
+  [13.3.1 Let and Const Declarations](http://www.ecma-international.org/ecma-262/6.0/#sec-let-and-const-declarations)
   ```
   LexicalBinding[In, Yield] :
     BindingIdentifier[?Yield] TypeHint[?Yield]opt Initializer[?In, ?Yield]opt
     BindingPattern[?Yield] Initializer[?In, ?Yield]
   ```
   
-  [13.2.2 Variable Statement](https://people.mozilla.org/~jorendorff/es6-draft.html#sec-variable-statement)
+  [13.3.2 Variable Statement](http://www.ecma-international.org/ecma-262/6.0/#sec-variable-statement)
   ```
   VariableDeclaration[In, Yield] :
     BindingIdentifier[?Yield] TypeHint[?Yield]opt Initializer[?In, ?Yield]opt
     BindingPattern[?Yield] Initializer[?In, ?Yield]
   ```
   
-  [13.2.3 Destructuring Binding Patterns](https://people.mozilla.org/~jorendorff/es6-draft.html#sec-destructuring-binding-patterns)
+  [13.3.3 Destructuring Binding Patterns](http://www.ecma-international.org/ecma-262/6.0/#sec-destructuring-binding-patterns)
   ```
   SingleNameBinding [Yield, GeneratorParameter] :
     [+GeneratorParameter] BindingIdentifier[Yield] TypeHint[?Yield]opt Initializer[In]opt
     [~GeneratorParameter] BindingIdentifier[?Yield] TypeHint[?Yield]opt Initializer[In, ?Yield]opt
   ```
-  [13.6 Iteration Statements](https://people.mozilla.org/~jorendorff/es6-draft.html#sec-iteration-statements)
+  [13.7 Iteration Statements](http://www.ecma-international.org/ecma-262/6.0/#sec-iteration-statements)
   ```
   ForBinding[Yield] :
     BindingIdentifier[?Yield] TypeHint[?Yield]opt
     BindingPattern[?Yield]
   ```
   
-  [14.1 Function Definitions](https://people.mozilla.org/~jorendorff/es6-draft.html#sec-function-definitions)
+  [14.1 Function Definitions](http://www.ecma-international.org/ecma-262/6.0/#sec-function-definitions)
   ```
   FunctionDeclaration[Yield, Default] :
     function BindingIdentifier[?Yield] ( FormalParameters ) TypeHint[?Yield]opt { FunctionBody }
@@ -75,7 +75,7 @@
     BindingElement[?Yield, ?GeneratorParameter] TypeHint[?Yield]opt
   ```
   
-  [14.2 Arrow Function Definitions](https://people.mozilla.org/~jorendorff/es6-draft.html#sec-arrow-function-definitions)
+  [14.2 Arrow Function Definitions](http://www.ecma-international.org/ecma-262/6.0/#sec-arrow-function-definitions)
   ```
   ArrowParameters[Yield] :
     BindingIdentifier[?Yield] TypeHint[?Yield]opt
@@ -85,7 +85,7 @@
   
   TODO: semantics of what `TypeHint` is attached to.
   
-  [14.3 Method Definitions](https://people.mozilla.org/~jorendorff/es6-draft.html#sec-method-definitions)
+  [14.3 Method Definitions](http://www.ecma-international.org/ecma-262/6.0/#sec-method-definitions)
   ```
   MethodDefinition[Yield] :
     PropertyName[?Yield] ( StrictFormalParameters ) TypeHint[?Yield]opt { FunctionBody }
@@ -95,7 +95,7 @@
   ```
   TODO: static semantics of set's typehint, it should be a syntax error if it's not empty, or "void"
   
-  [14.4 Generator Function Definitions](https://people.mozilla.org/~jorendorff/es6-draft.html#sec-generator-function-definitions)
+  [14.4 Generator Function Definitions](http://www.ecma-international.org/ecma-262/6.0/#sec-generator-function-definitions)
   ```
   GeneratorMethod[Yield] :
     * PropertyName[?Yield] ( StrictFormalParameters[Yield,GeneratorParameter] ) TypeHint[?Yield]opt { GeneratorBody }
